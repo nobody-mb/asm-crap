@@ -38,4 +38,3 @@ sl_inc:
 sl_out:
 	movb	$0x0, (%rdi)
 	ret
-	

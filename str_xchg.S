@@ -1,43 +1,43 @@
 /*
- * Prototype : void asm_str_rep(char *dst, const char *src, const char *find, const char *rep)
+ * Prototype : void asm_str_xchg(char *dst, const char *src, const char *find, const char *rep)
  * Input     : dst (rdi), src (rsi), find (rdx), rep (rcx)	
  * Output    : none
  * Clobber   : rax (temp.), rbx (i)
  */	
 
-.globl asm_str_rep
-asm_str_rep:
+.globl asm_str_xchg
+asm_str_xchg:
 	testq	%rsi, %rsi
-	je	rp_out
+	je	sx_out
 	testq	%rdx, %rdx
-	je	rp_out
-rp_loop:
+	je	sx_out
+sx_loop:
 	xorq	%rbx, %rbx
-rp_comp:
+sx_comp:
 	movb	(%rdx, %rbx), %al
 	testb	%al, %al
-	je	rp_bgrp
+	je	sx_bgrp
 	cmpb	%al, (%rsi, %rbx)
-	jne	rp_copy
+	jne	sx_copy
 	incq	%rbx
-	jmp	rp_comp
-rp_bgrp:
+	jmp	sx_comp
+sx_bgrp:
 	addq	%rbx, %rsi
 	xorq	%rbx, %rbx
-rp_repl:
+sx_repl:
 	movb	(%rcx, %rbx), %al
 	testb	%al, %al
-	je	rp_loop
+	je	sx_loop
 	movb	%al, (%rdi)
 	incq	%rbx
 	incq	%rdi
-	jmp	rp_repl
-rp_copy:
+	jmp	sx_repl
+sx_copy:
 	movb	(%rsi), %al
 	movb	%al, (%rdi)
 	incq	%rsi
 	incq	%rdi
 	testb	%al, %al
-	jne	rp_loop
-rp_out:
+	jne	sx_loop
+sx_out:
 	ret

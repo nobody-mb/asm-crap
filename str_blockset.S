@@ -23,20 +23,3 @@ bs_loop_mid:
     decq    %rdx
     jge     bs_loop
     ret
-
-/* 
-
-instruction summary
-
-mov         5
-test        1
-dec         1
-inc         2
-ret         1   
-jne         1
-jmp         1
-jge         1
-
-total(8)    13
-
-*/

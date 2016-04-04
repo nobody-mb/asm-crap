@@ -30,12 +30,3 @@ sc_inc_start:
     cmpb    $0, (%rdi)
     jne     sc_main_loop
     ret
-/* 
-
-instruction summary
-
-
-
-total() 
-
-*/
